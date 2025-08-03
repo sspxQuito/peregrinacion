@@ -1,0 +1,336 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peregrinación a Quito</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: white; }
+        header { position: fixed; top: 0; left: 0; width: 100%; background: lightgray; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 10px 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        nav ul { list-style: none; padding: 0; display: flex; margin: 0; flex-wrap: wrap; }
+        nav li { margin: 5px; }
+        .left-link { margin-right: 10px; font-size: 0.96em; padding: 8px 16px; background-color: lightblue; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: black; font-weight: bold; }
+        nav a { font-size: 0.96em; padding: 8px 16px; background-color: lightblue; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: black; font-weight: bold; }
+        main { margin-top: 80px; padding: 20px; }
+        section { display: none; padding-top: 20px; }
+        section.active { display: block; }
+        .landing { text-align: center; padding-top: 100px; }
+        .landing h1 { font-size: 3em; color: white; text-shadow: 2px 2px 4px black; }
+        .landing p { font-size: 1.5em; color: white; text-shadow: 1px 1px 2px black; }
+        form { max-width: 600px; margin: 0 auto; }
+        label { display: block; margin-top: 10px; }
+        input, textarea, select { width: 100%; box-sizing: border-box; height: 40px; font-family: inherit; font-size: inherit; }
+        textarea { height: 100px; }
+        .error { color: red; display: none; }
+        footer { text-align: center; margin-top: 20px; }
+        footer a { font-size: 0.84em; padding: 8px 16px; background-color: lightgreen; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: black; font-weight: bold; }
+        #registration p { font-size: 1.5em; font-weight: bold; color: darkblue; margin-bottom: 0; }
+        #registration form { margin-top: 10px; }
+        #registration button[type="button"] { font-size: 1.44em; background-color: darkblue; color: white; border: none; border-radius: 5px; padding: 12px 24px; }
+        #contact-us button[type="submit"] { font-size: 1.44em; background-color: darkblue; color: white; border: none; border-radius: 5px; padding: 12px 24px; }
+        @media (max-width: 600px) {
+            header { flex-direction: column; align-items: flex-start; padding: 10px; }
+            nav ul { flex-direction: column; }
+            .left-link { margin-bottom: 10px; }
+        }
+        #background-slideshow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-size: cover; background-position: center; transition: background-image 1s ease-in-out; display: none; }
+        .photo-grid { display: flex; flex-wrap: wrap; justify-content: center; }
+        .photo-grid img { width: calc(25% - 10px); height: auto; aspect-ratio: 1/1; object-fit: cover; margin: 5px; }
+        @media (max-width: 768px) { .photo-grid img { width: calc(50% - 10px); } }
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
+        .name-fields { display: flex; justify-content: space-between; }
+        .name-fields input { width: 48%; }
+        .modal button[type="submit"] { font-size: 1.44em; background-color: darkblue; color: white; border: none; border-radius: 5px; padding: 12px 24px; }
+        #about h1 { text-align: center; }
+        #registration { text-align: left; padding-left: 20px; }
+        #registration form { text-align: left; }
+        #contact-us { text-align: left; }
+    </style>
+</head>
+<body>
+    <div id="background-slideshow"></div>
+    <header>
+        <a href="#landing" class="left-link" onclick="showSection('landing')">Peregrinación a Quito</a>
+        <nav>
+            <ul>
+                <li><a href="#about" onclick="showSection('about')">Acerca de</a></li>
+                <li><a href="#travel-flights" onclick="showSection('travel-flights')">Vuelos y Viajes</a></li>
+                <li><a href="#hotels" onclick="showSection('hotels')">Hoteles</a></li>
+                <li><a href="#outings" onclick="showSection('outings')">Excursiones</a></li>
+                <li><a href="#registration" onclick="showSection('registration')">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="landing" class="active landing">
+            <h1>Nuestra Señora del Buen Suceso de la Purificación</h1>
+            <p>Fraternidad Sacerdotal San Pío X</p>
+            <p>Peregrinación a Quito</p>
+            <p>23 de enero - 2 de febrero</p>
+        </section>
+        <section id="about">
+            <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/A1.jpg" style="display: block; margin: 0 auto; width: 45%;">
+            <h1>Nuestra Señora del Buen Suceso de la Purificación</h1>
+            <h2>Peregrinación a Quito</h2>
+            <p>Apareciendo a Mariana de Jesús, la Virgen María ordenó que se hiciera una estatua como Ella apareció. Completada milagrosamente en 1611, la Santa Virgen ordenó que esta estatua se colocara en la silla de la Abadesa para que Ella pueda gobernar y proteger este convento. Para este propósito, tomó el nombre en religión de Nuestra Señora del Buen Suceso de la Purificación. Dijo que este título será el apoyo y salvaguarda de la Fe durante este tiempo de crisis.</p>
+            <p>Esta peregrinación es una novena de oración a Nuestra Señora del Buen Suceso de la Purificación. Cada día comienza con una procesión al amanecer desde el Santuario de Nuestra Señora caminando hacia las diversas comunidades religiosas del centro histórico. La Santa Misa se ofrece diariamente. Se organiza una salida a varios sitios del centro histórico de la ciudad cada día. Se da una conferencia cada noche. Hay una mezcla perfecta de oración y tiempo libre recreativo.</p>
+            <h2>Nuestro Propósito</h2>
+            <p>Esta peregrinación es una novena de oración a Nuestra Señora del Buen Suceso de la Purificación. Cada día comienza con una procesión al amanecer desde el Santuario de Nuestra Señora caminando hacia las diversas comunidades religiosas del centro histórico. La Santa Misa se ofrece diariamente. Se organiza una salida a varios sitios del centro histórico de la ciudad cada día. Se da una conferencia cada noche. Hay una mezcla perfecta de oración y tiempo libre recreativo.</p>
+            <h2>Información General</h2>
+            <p>Esta Peregrinación es a la ciudad de Quito, Ecuador, para visitar la estatua milagrosa de Nuestra Señora del Buen Suceso de la Purificación.</p>
+            <p>23 de enero – 2 de febrero son las fechas de la peregrinación, ya que se centra en una novena en preparación para la Fiesta de la Purificación.</p>
+            <p>Mantenemos una novena previa a la fiesta en imitación de la observancia original en 1611. Los religiosos de la ciudad predicaron durante nueve días en preparación para la Fiesta. Varias órdenes religiosas fueron mandatadas por el obispo, lo que demuestra que entendió la importancia y el significado de la estatua milagrosa.</p>
+            <p>Aunque esta costumbre ha cesado, nuestras procesiones matutinas del rosario buscan revivir este espíritu visitando las diversas casas religiosas de la ciudad.</p>
+            <h2>Quito, Ecuador</h2>
+            <p>La Peregrinación al Santuario de Nuestra Señora del Buen Suceso de la Purificación se lleva a cabo cada año en Quito, Ecuador, en el centro de ciudad de estilo europeo más antiguo del mundo.</p>
+            <p>Los eventos diarios durante esta peregrinación se realizan a distancia a pie de la Plaza Grande en el centro histórico de la ciudad.</p>
+            <h2>El Día de la Fiesta:</h2>
+            <p>La Gran Procesión del 2 de febrero comienza a las 5 a.m.</p>
+            <p>Esta procesión es atendida por varios miles de personas de la ciudad, así como varios sacerdotes y religiosos de Quito.</p>
+            <h2>Horario Diario:</h2>
+            <ul>
+                <li>A las 5:00 a.m. procesión al amanecer diaria.</li>
+                <li>A las 8:30 a.m. sacrificio de la Misa diaria.</li>
+                <li>A las 10:30 a.m. salida a uno de los sitios cercanos. Estos sitios están todos a distancia a pie. Las tarifas de entrada suelen ser entre $3-$5 por sitio, y el costo es cubierto directamente por el peregrino.</li>
+                <li>De 1:00 p.m. - 5:00 p.m. los peregrinos tienen tiempo libre. Puede explorar la ciudad y ver los muchos lugares e iglesias que no están en el horario oficial.</li>
+                <li>A las 5:30 p.m. Conferencia Espiritual.</li>
+            </ul>
+            <h2>Vestimenta:</h2>
+            <p>El clima en Quito es primavera perpetua. Las temperaturas diarias promedio serían de 60 a 80 grados Fahrenheit. Aunque hemos tenido buen clima en peregrinaciones anteriores, existe la posibilidad de lluvia. Se anima a todos los peregrinos a empacar un paraguas.</p>
+            <p>Se esperan estándares mary-like para la modestia en todo momento.</p>
+            <h2>Comidas:</h2>
+            <p>Las comidas no se proporcionan en grupo. Cada peregrino asegurará sus propias comidas como regla general durante la peregrinación. ¡Presupueste en consecuencia!</p>
+            <p>Desayuno: Algunos hoteles ofrecen desayuno y otros no. Encontrar un restaurante/café para desayunar es bastante fácil si su hotel no ofrece desayuno.</p>
+            <p>Almuerzo/Cena: los peregrinos son libres de comer donde deseen y se les anima a agruparse y experimentar los diferentes restaurantes de la ciudad.</p>
+            <h2>Seguridad:</h2>
+            <p>Quito es una ciudad hermosa, pero como todas las ciudades, uno debe estar siempre consciente de su entorno. Recomendamos caminar con un grupo de compañeros peregrinos, y que sea mindful de su situación y sus pertenencias.</p>
+            <p>Más información se dará al registrarse.</p>
+            <footer>
+                <a href="#contact-us" onclick="showSection('contact-us')">Contáctenos</a>
+            </footer>
+        </section>
+        <section id="travel-flights">
+            <h2>Viajando a Quito:</h2>
+            <p>Todos los peregrinos deben hacer sus propios arreglos de vuelo.</p>
+            <p>Nuestra Peregrinación se llevará a cabo del 24 de enero al 2 de febrero.</p>
+            <p>Muchos vuelos que llegan a Quito lo harán cerca de la medianoche del 23 de enero. Para cuando llegue a su hotel, puede que solo tenga unas pocas horas de sueño antes de la primera procesión al amanecer el 24 de enero. Otros vuelos tienen diferentes horarios de llegada que lo hacen más fácil.</p>
+            <p>Llegar a Ecuador al menos un día antes de la novena es una buena idea. Esto le permite aclimatarse a la altitud y descansar adecuadamente antes de que comiencen las oraciones de la novena.</p>
+            <h2>Regresando de Quito:</h2>
+            <p>Muchas aerolíneas parten justo después de la medianoche, lo que significa que si reserva un vuelo del 3 de febrero, iría al aeropuerto la noche del 2 de febrero.</p>
+            <p>Los peregrinos deben estar muy conscientes de los horarios de llegada y salida.</p>
+            <footer>
+                <a href="#contact-us" onclick="showSection('contact-us')">Contáctenos</a>
+            </footer>
+        </section>
+        <section id="hotels">
+            <h2>Hoteles:</h2>
+            <p>Todos los peregrinos deben hacer sus propios arreglos de hotel.</p>
+            <p>Una vez que se haya registrado, recibirá una lista de hoteles que están cerca y convenientes.</p>
+            <p>Recomendamos encarecidamente elegir un hotel de la lista proporcionada. Ha sucedido que peregrinos ignorantemente eligieron hoteles demasiado lejos.</p>
+            <footer>
+                <a href="#contact-us" onclick="showSection('contact-us')">Contáctenos</a>
+            </footer>
+        </section>
+        <section id="outings">
+            <h2>Excursiones:</h2>
+            <p>Se planifican excursiones todos los días de la peregrinación. Estas excursiones incluyen:</p>
+            <ul>
+                <li>Museo de San Francisco de Quito</li>
+                <li>Museo de San Agustín</li>
+                <li>Museo de Santa Catalina</li>
+                <li>Museo de La Compañía</li>
+                <li>Museo de Catedral de Quito</li>
+                <li>Caminata del último día de García Moreno</li>
+                <li>Viaje en bus a Otavalo y San Antonio de Ibarra</li>
+                <li>Más por anunciar...</li>
+            </ul>
+            <div class="photo-grid">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O1.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O2.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O3.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O4.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O5.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O6.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O7.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O8.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O9.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O10.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O11.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O12.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O13.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O14.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O15.jpg">
+                <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O16.jpg">
+            </div>
+            <footer>
+                <a href="#contact-us" onclick="showSection('contact-us')">Contáctenos</a>
+            </footer>
+        </section>
+        <section id="registration">
+            <img src="https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/R1.jpg" style="float: left; margin-right: 10px; width: 300px; height: 300px; object-fit: cover;">
+            <h2>Registro de Peregrinación</h2>
+            <p>USD 100</p>
+            <form style="clear: both;">
+                <button type="button" onclick="openModal()">Comprar</button>
+            </form>
+            <footer>
+                <a href="#contact-us" onclick="showSection('contact-us')">Contáctenos</a>
+            </footer>
+        </section>
+        <section id="contact-us">
+            <h2>Contáctenos</h2>
+            <p>Por favor complete el formulario a continuación</p>
+            <form id="contactForm" action="mailto:altrench@yahoo.com" method="post" enctype="text/plain">
+                <label for="first_name">Nombre (requerido)</label>
+                <input type="text" id="first_name" name="First Name" placeholder="Nombre" required>
+                <span class="error">Dato requerido</span>
+                <input type="text" name="Last Name" placeholder="Apellido" required>
+                <span class="error">Dato requerido</span>
+                <label for="email">Correo Electrónico (requerido)</label>
+                <input type="email" id="email" name="Email" required>
+                <span class="error">Dato requerido</span>
+                <label for="subject">Asunto (requerido)</label>
+                <input type="text" id="subject" name="Subject" required>
+                <span class="error">Dato requerido</span>
+                <label for="message">Mensaje (requerido)</label>
+                <textarea id="message" name="Message" required></textarea>
+                <span class="error">Dato requerido</span>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form action="mailto:sspxpadres@gmail.com" method="post" enctype="text/plain">
+                <label for="church">¿A qué priorato de la FSSPX asiste? Esta peregrinación es solo para los fieles de la FSSPX.</label>
+                <select id="church" name="Church" required>
+                    <option value="Sede del Distrito de Sudamérica (Martínez)">Sede del Distrito de Sudamérica (Martínez)</option>
+                    <option value="Priorato del Inmaculado Corazón de María (Pcia. Salta)">Priorato del Inmaculado Corazón de María (Pcia. Salta)</option>
+                    <option value="Priorato Nuestra Señora de Itatí (Pcia. Corrientes)">Priorato Nuestra Señora de Itatí (Pcia. Corrientes)</option>
+                    <option value="Priorato San José (Pcia. Mendoza)">Priorato San José (Pcia. Mendoza)</option>
+                    <option value="Priorato San Pío V (Pcia. Córdoba)">Priorato San Pío V (Pcia. Córdoba)</option>
+                    <option value="Priorato San Pío X (Ciudad de Buenos Aires)">Priorato San Pío X (Ciudad de Buenos Aires)</option>
+                    <option value="Priorato de los Sagrados Corazones (La Reja, Pcia. Bs. As.)">Priorato de los Sagrados Corazones (La Reja, Pcia. Bs. As.)</option>
+                    <option value="Priorato Cristo Rey (Chile)">Priorato Cristo Rey (Chile)</option>
+                    <option value="Distrito México">Distrito México</option>
+                    <option value="Casa Autónoma de Centroamérica">Casa Autónoma de Centroamérica</option>
+                    <option value="Casa Autónoma de Brasil">Casa Autónoma de Brasil</option>
+                </select>
+                <span class="error">Dato requerido</span>
+                <label>Nombre del Peregrino</label>
+                <div class="name-fields">
+                    <input type="text" name="Name" placeholder="Nombre" required>
+                    <span class="error">Dato requerido</span>
+                    <input type="text" name="Last Name" placeholder="Apellido" required>
+                    <span class="error">Dato requerido</span>
+                </div>
+                <label for="additional">Nombre(s) de Peregrino(s) Adicional(es) Registrándose</label>
+                <textarea id="additional" name="Additional Pilgrims" rows="3"></textarea>
+                <button type="submit" style="background-color: darkblue; color: white;">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const images = [
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/L1.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/L2.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/L3.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/L4.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/L5.jpg'
+        ];
+        let currentImageIndex = 0;
+        const slideshow = document.getElementById('background-slideshow');
+        let slideshowInterval;
+        // Preload images
+        const preloadedImages = [];
+        images.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            preloadedImages.push(img);
+        });
+        // Preload other images
+        const otherImages = [
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/A1.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/R1.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O1.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O2.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O3.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O4.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O5.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O6.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O7.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O8.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O9.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O10.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O11.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O12.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O13.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O14.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O15.jpg',
+            'https://raw.githubusercontent.com/sspxQuito/peregrinacion/main/O16.jpg'
+        ];
+        otherImages.forEach(src => new Image().src = src);
+        function startSlideshow() {
+            slideshow.style.display = 'block';
+            changeBackground();
+            slideshowInterval = setInterval(changeBackground, 4000);
+        }
+        function stopSlideshow() {
+            clearInterval(slideshowInterval);
+            slideshow.style.display = 'none';
+        }
+        function changeBackground() {
+            slideshow.style.backgroundImage = `url(${images[currentImageIndex]})`;
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+        }
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+            const section = document.getElementById(id);
+            section.classList.add('active');
+            section.scrollTop = 0; // Scroll the section itself to top
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }, 10); // Increased timeout
+            if (id === 'landing') {
+                startSlideshow();
+            } else {
+                stopSlideshow();
+            }
+        }
+        // Default to landing
+        showSection('landing');
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            let valid = true;
+            this.querySelectorAll('input[required], textarea[required]').forEach(field => {
+                const error = field.nextElementSibling;
+                if (!field.value.trim()) {
+                    error.style.display = 'block';
+                    valid = false;
+                } else {
+                    error.style.display = 'none';
+                }
+            });
+            if (!valid) event.preventDefault();
+        });
+        function openModal() {
+            document.getElementById('buyModal').style.display = 'block';
+        }
+        function closeModal() {
+            document.getElementById('buyModal').style.display = 'none';
+        }
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('buyModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+```
